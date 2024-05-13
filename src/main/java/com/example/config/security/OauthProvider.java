@@ -7,22 +7,9 @@ import lombok.Getter;
 
 import java.util.Map;
 
-@Getter
-public class OauthProvider {
-    private final Map<String, Object> provider;
-    private final String providerKey;
-    private final String name;
-    private final String email;
-    private final String picture;
-
-    @Builder
-    public OauthProvider(Map<String, Object> provider, String providerKey, String name, String email, String picture) {
-        this.provider = provider;
-        this.providerKey = providerKey;
-        this.name = name;
-        this.email = email;
-        this.picture = picture;
-    }
+@Builder
+public record OauthProvider(Map<String, Object> provider, String providerKey, String name, String email,
+                            String picture) {
 
     public static OauthProvider of(String registrationId, String name, Map<String, Object> attributes) {
         return ofGoogle(name, attributes);

@@ -37,14 +37,14 @@ public class OAuth2UserService implements org.springframework.security.oauth2.cl
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(
                         account.getRoleKey())),
-                provider.getProvider(),
-                provider.getProviderKey()
+                provider.provider(),
+                provider.providerKey()
         );
     }
 
     private Account saveOrUpdate(OauthProvider provider) {
-        Account account = accountRepository.findByEmail(provider.getEmail())
-                .map(entity -> entity.update(provider.getName(), provider.getPicture()))
+        Account account = accountRepository.findByEmail(provider.email())
+                .map(entity -> entity.update(provider.name(), provider.picture()))
                 .orElse(provider.toEntity());
 
         return accountRepository.save(account);
