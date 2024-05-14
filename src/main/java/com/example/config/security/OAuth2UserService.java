@@ -46,11 +46,7 @@ public class OAuth2UserService implements org.springframework.security.oauth2.cl
     private Account saveOrUpdate(OauthProvider provider) {
         Account account = accountRepository.findByEmail(provider.email())
                 .map(entity -> entity.update(provider.name(), provider.picture()))
-                .orElseGet(() -> {
-                    Account newAccount = provider.toEntity();
-                    newAccount.addRole(Role.GUEST); // 최초 로그인
-                    return newAccount;
-                });
+                .orElseGet(provider::toEntity);
 
         if (account.getRole() == Role.GUEST && account.getEmail().equals("hyunhu0309@gmail.com")) { // Role 부여 조건 예시
             account.addRole(Role.USER);
