@@ -1,6 +1,7 @@
 package com.example.config.security;
 
 import com.example.account.entities.Account;
+import com.example.account.enums.Role;
 import com.example.account.repositories.AccountRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -45,8 +46,17 @@ public class OAuth2UserService implements org.springframework.security.oauth2.cl
     private Account saveOrUpdate(OauthProvider provider) {
         Account account = accountRepository.findByEmail(provider.email())
                 .map(entity -> entity.update(provider.name(), provider.picture()))
-                .orElse(provider.toEntity());
+                .orElseGet(() -> {
+                    Account newAccount = provider.toEntity();
+                    newAccount.addRole(Role.GUEST); // 최초 로그인
+                    return newAccount;
+                });
+
+        if (account.getRole() == Role.GUEST && account.getEmail().equals("hyunhu0309@gmail.com")) { // Role 부여 조건 예시
+            account.addRole(Role.USER);
+        }
 
         return accountRepository.save(account);
     }
+
 }

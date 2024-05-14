@@ -3,7 +3,6 @@ package com.example.config.security;
 import com.example.account.entities.Account;
 import com.example.account.enums.Role;
 import lombok.Builder;
-import lombok.Getter;
 
 import java.util.Map;
 

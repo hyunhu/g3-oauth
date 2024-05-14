@@ -45,4 +45,8 @@ public class Account extends BaseTimeEntity {
     public String getRoleKey() {
         return this.role.getKey();
     }
+
+    public void addRole(Role role) {
+        this.role = role;
+    }
 }
