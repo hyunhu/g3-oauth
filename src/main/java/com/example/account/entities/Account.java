@@ -27,18 +27,22 @@ public class Account extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     @Builder
-    public Account(String name, String email, String picture, Role role) {
+    public Account(String name, String email, String picture, Role role, Department department) {
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
+        this.department = department;
     }
 
     public Account update(String name, String picture) {
         this.name = name;
         this.picture = picture;
-
         return this;
     }
 
@@ -48,5 +52,9 @@ public class Account extends BaseTimeEntity {
 
     public void addRole(Role role) {
         this.role = role;
+    }
+
+    public void addDepartment(Department department) {
+        this.department = department;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.config.security;
 
 import com.example.account.entities.Account;
+import com.example.account.entities.Department;
 import com.example.account.enums.Role;
 import lombok.Builder;
 
@@ -24,12 +25,13 @@ public record OauthProvider(Map<String, Object> provider, String providerKey, St
                 .build();
     }
 
-    public Account toEntity() {
+    public Account toEntity(Department department) {
         return Account.builder()
                 .name(name)
                 .email(email)
                 .picture(picture)
                 .role(Role.GUEST)
+                .department(department)
                 .build();
     }
 }

@@ -1,8 +1,10 @@
 package com.example.config.security;
 
 import com.example.account.entities.Account;
+import com.example.account.entities.Department;
 import com.example.account.enums.Role;
 import com.example.account.repositories.AccountRepository;
+import com.example.account.repositories.DepartmentRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +21,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class OAuth2UserService implements org.springframework.security.oauth2.client.userinfo.OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final AccountRepository accountRepository;
+    private final DepartmentRepository departmentRepository;
     private final HttpSession httpSession;
 
     @Override
@@ -46,13 +49,24 @@ public class OAuth2UserService implements org.springframework.security.oauth2.cl
     private Account saveOrUpdate(OauthProvider provider) {
         Account account = accountRepository.findByEmail(provider.email())
                 .map(entity -> entity.update(provider.name(), provider.picture()))
-                .orElseGet(provider::toEntity);
+                .orElseGet(() -> {
+                    Department department = createAndSaveDepartment();
+                    return provider.toEntity(department);
+                });
 
-        if (account.getRole() == Role.GUEST && account.getEmail().equals("hyunhu0309@gmail.com")) { // Role 부여 조건 예시
+        if (account.getRole() == Role.GUEST && account.getEmail().contains("hyunhu")) {
             account.addRole(Role.USER);
         }
 
         return accountRepository.save(account);
     }
+
+    private Department createAndSaveDepartment() {
+        Department department = Department.builder()
+                .name("IT") // 임의의 부서 설정
+                .build();
+        return departmentRepository.save(department);
+    }
+
 
 }
