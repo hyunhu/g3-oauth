@@ -1,6 +1,7 @@
 package com.example.account.entities;
 
 import com.example.account.enums.Role;
+import com.example.department.entities.Department;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

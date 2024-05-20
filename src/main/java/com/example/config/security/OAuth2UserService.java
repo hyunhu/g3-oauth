@@ -1,10 +1,10 @@
 package com.example.config.security;
 
 import com.example.account.entities.Account;
-import com.example.account.entities.Department;
+import com.example.department.entities.Department;
 import com.example.account.enums.Role;
-import com.example.account.repositories.AccountRepository;
-import com.example.account.repositories.DepartmentRepository;
+import com.example.repositories.AccountRepository;
+import com.example.repositories.DepartmentRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

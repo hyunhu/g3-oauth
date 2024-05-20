@@ -1,5 +1,6 @@
-package com.example.account.entities;
+package com.example.department.entities;
 
+import com.example.account.entities.Account;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

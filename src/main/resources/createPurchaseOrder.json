@@ -1,0 +1,36 @@
+{
+  "eoiId": "123",
+  "itemInfo": {
+    "itemCode": "001",
+    "itemName": "SampleItem",
+    "lot": "10"
+  },
+  "companyInfo": {
+    "comCode": "C001",
+    "comName": "SampleCompany",
+    "clientCode": "CL001"
+  },
+  "storeInfo": {
+    "storeCode": "S001",
+    "storeName": "SampleStore"
+  },
+  "centerInfo": {
+    "centerCode": "CT001",
+    "centerName": "SampleCenter",
+    "centerInDate": "2023-05-20",
+    "storeInDate": "2023-05-21"
+  },
+  "orderInfo": {
+    "orderDate": "2023-05-19",
+    "orderCost": "100",
+    "orderUnit": "orderUnit",
+    "orderQuantity": "10",
+    "orderAmount": "1000"
+  },
+  "statementNo": "ST123",
+  "buyerName": "Hyunhu",
+  "orderType": "OT001",
+  "orderTypeName": "TDC",
+  "releaseRequestYn": "Y",
+  "remarks": "SampleRemarks"
+}

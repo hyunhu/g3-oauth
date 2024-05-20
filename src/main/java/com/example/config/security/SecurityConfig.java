@@ -31,14 +31,18 @@ public class SecurityConfig {
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers(
-                                "/"
-                                ,"/success"
-                                ,"/h2-console/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests((authorizeRequests) -> {
+//                    authorizeRequests.requestMatchers("/api/**")
+//                            .hasRole("USER");
+
+                    authorizeRequests.requestMatchers(
+                                    "/"
+                                    ,"/success"
+                                    ,"/h2-console/**"
+                                    ,"/api/**"
+                            ).permitAll()
+                            .anyRequest().authenticated();
+                })
 
                 .oauth2Login(oauth2Login ->
                         oauth2Login
