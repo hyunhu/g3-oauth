@@ -15,8 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "PURCHASEORDER")
 public class PurchaseOrder extends BaseTimeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
